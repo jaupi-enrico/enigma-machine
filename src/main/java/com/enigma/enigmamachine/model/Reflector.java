@@ -1,4 +1,4 @@
 package com.enigma.enigmamachine.model;
 
-public class Reflecor {
+public class Reflector {
 }
