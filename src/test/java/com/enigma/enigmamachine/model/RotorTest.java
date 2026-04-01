@@ -1,8 +1,8 @@
 package com.enigma.enigmamachine.model;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
+
 class RotorTest {
 
     @Test
@@ -13,9 +13,7 @@ class RotorTest {
             char enc = r.cifraAvanti(c);
             char dec = r.cifraIndietro(enc);
 
-            if (c != dec) {
-                System.out.println("Errore su: " + c);
-            }
+            assertEquals(c, dec, "Errore su carattere: " + c);
         }
     }
 }
