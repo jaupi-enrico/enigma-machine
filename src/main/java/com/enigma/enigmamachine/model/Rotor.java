@@ -9,11 +9,12 @@ public class Rotor {
     private int sizeAlfabeto;
     private char letteraAvanzamento;
     private int posizioneAttuale;
+    private int indiceRing;
 
-    public Rotor(String cablaggio, char letteraAvanzamento, int posizione) {
+    public Rotor(String cablaggio, char letteraAvanzamento, int posizione, int indiceRing) {
         this.letteraAvanzamento = letteraAvanzamento;
-        this.sizeAlfabeto  = cablaggio.length();
-        setPosizioneAttuale(posizione);
+        this.sizeAlfabeto = cablaggio.length();
+        setIndiceRing(indiceRing);
 
         mappaDavanti = new HashMap<>();
         mappaIndietro = new HashMap<>();
@@ -25,6 +26,8 @@ public class Rotor {
             mappaDavanti.put(input, output);
             mappaIndietro.put(output, input);
         }
+
+        setPosizioneAttuale(posizione);
     }
 
     public void ruota() {
@@ -32,12 +35,14 @@ public class Rotor {
     }
 
     public boolean isLetteraAvanzamento() {
-        return (char) ('A' + posizioneAttuale) == letteraAvanzamento;
+        int pos = (posizioneAttuale - indiceRing + sizeAlfabeto) % sizeAlfabeto;
+        return (char) ('A' + pos) == letteraAvanzamento;
     }
 
     public char cifraAvanti(char c) {
         c = Character.toUpperCase(c);
-        int spostamento = (c - 'A' + posizioneAttuale) % sizeAlfabeto;
+
+        int spostamento = (c - 'A' + posizioneAttuale - indiceRing + sizeAlfabeto) % sizeAlfabeto;
         char carattereSpostato = (char) ('A' + spostamento);
 
         Character carattereMappato = mappaDavanti.get(carattereSpostato);
@@ -45,7 +50,7 @@ public class Rotor {
             throw new IllegalArgumentException("Carattere non valido: " + c);
         }
 
-        int output = (carattereMappato - 'A' - posizioneAttuale + sizeAlfabeto) % sizeAlfabeto;
+        int output = (carattereMappato - 'A' - posizioneAttuale + indiceRing + sizeAlfabeto) % sizeAlfabeto;
 
         return (char) ('A' + output);
     }
@@ -53,7 +58,7 @@ public class Rotor {
     public char cifraIndietro(char c) {
         c = Character.toUpperCase(c);
 
-        int spostamento = (c - 'A' + posizioneAttuale) % sizeAlfabeto;
+        int spostamento = (c - 'A' + posizioneAttuale - indiceRing + sizeAlfabeto) % sizeAlfabeto;
         char carattereSpostato = (char) ('A' + spostamento);
 
         Character carattereMappato = mappaIndietro.get(carattereSpostato);
@@ -61,7 +66,7 @@ public class Rotor {
             throw new IllegalArgumentException("Carattere non valido: " + c);
         }
 
-        int output = (carattereMappato - 'A' - posizioneAttuale + sizeAlfabeto) % sizeAlfabeto;
+        int output = (carattereMappato - 'A' - posizioneAttuale + indiceRing + sizeAlfabeto) % sizeAlfabeto;
 
         return (char) ('A' + output);
     }
@@ -74,15 +79,23 @@ public class Rotor {
         this.posizioneAttuale = (posizioneAttuale % sizeAlfabeto + sizeAlfabeto) % sizeAlfabeto;
     }
 
+    public void setIndiceRing(int indiceRing) {
+        this.indiceRing = (indiceRing % sizeAlfabeto + sizeAlfabeto) % sizeAlfabeto;
+    }
+
+    public int getIndiceRing() {
+        return indiceRing;
+    }
+
     static public Rotor creaRotore1(int pos) {
-        return  new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'Q', pos);
+        return new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'Q', pos, 0);
     }
 
     static public Rotor creaRotore2(int pos) {
-        return  new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'E', pos);
+        return new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'E', pos, 0);
     }
 
     static public Rotor creaRotore3(int pos) {
-        return  new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'V', pos);
+        return new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'V', pos, 0);
     }
 }
