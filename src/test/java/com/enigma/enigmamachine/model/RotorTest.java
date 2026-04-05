@@ -19,9 +19,9 @@ class RotorTest {
 
     @Test
     void cifratura_completa_reversibile() {
-        Rotor r1 = Rotor.creaRotore1(0);
-        Rotor r2 = Rotor.creaRotore2(0);
-        Rotor r3 = Rotor.creaRotore3(0);
+        Rotor r1 = Rotor.creaRotore1();
+        Rotor r2 = Rotor.creaRotore2();
+        Rotor r3 = Rotor.creaRotore3();
         //Riflessore
 
         String input = "CIAOTECHEGUARDIQUESTOCODICE";
@@ -54,9 +54,9 @@ class RotorTest {
             cifrato += x;
         }
 
-        r1 = Rotor.creaRotore1(0);
-        r2 = Rotor.creaRotore2(0);
-        r3 = Rotor.creaRotore3(0);
+        r1 = Rotor.creaRotore1();
+        r2 = Rotor.creaRotore2();
+        r3 = Rotor.creaRotore3();
 
         String decifrato = "";
 
