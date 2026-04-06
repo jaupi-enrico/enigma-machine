@@ -6,7 +6,6 @@ import java.util.Map;
 public class Reflector {
 
     // mappa del riflettore UKW_B: "YRUHQSLDPXNGOKMIEBFZCWVJAT";
-    // mappa del riflettore UKW-C: "FVPJIAOYEDRZXWGCTKUQSBNMHL"
 
     private Map<Character, Character> mappaSpecchio;
     private int sizeAlfabeto;
@@ -30,9 +29,5 @@ public class Reflector {
 
     static public Reflector creaUKW_B(){
         return new Reflector("YRUHQSLDPXNGOKMIEBFZCWVJAT");
-    }
-
-    static public Reflector creaUKW_C(){
-        return new Reflector("FVPJIAOYEDRZXWGCTKUQSBNMHL");
     }
 }
