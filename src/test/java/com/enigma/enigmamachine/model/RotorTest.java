@@ -32,8 +32,8 @@ class RotorTest {
 
         for (char c : input.toCharArray()) {
 
-            boolean r3Avanzamento = r3.isLetteraAvanzamento(); // fast
-            boolean r2Avanzamento = r2.isLetteraAvanzamento(); // middle
+            boolean r3Avanzamento = r3.isLetteraAvanzamento();
+            boolean r2Avanzamento = r2.isLetteraAvanzamento();
 
             if (r2Avanzamento) {
                 r1.ruota();
@@ -45,25 +45,17 @@ class RotorTest {
 
             r3.ruota();
 
-            System.out.println((char) (r1.getPosizioneAttuale() + 'A') + "" + (char) (r2.getPosizioneAttuale() + 'A') + "" + (char) (r3.getPosizioneAttuale() + 'A'));
 
 
             char x = r3.cifraAvanti(c);
-            System.out.println(x);
             x = r2.cifraAvanti(x);
-            System.out.println(x);
             x = r1.cifraAvanti(x);
-            System.out.println(x);
 
             x = riflessore.rifletti(x);
-            System.out.println(x);
 
             x = r1.cifraIndietro(x);
-            System.out.println(x);
             x = r2.cifraIndietro(x);
-            System.out.println(x);
             x = r3.cifraIndietro(x);
-            System.out.println(x);
 
             cifrato += x;
         }
@@ -75,28 +67,30 @@ class RotorTest {
         String decifrato = "";
 
         for (char c : cifrato.toCharArray()) {
-            boolean r2Avanzamento = r3.isLetteraAvanzamento();
-            boolean r1Avanzamento = r2.isLetteraAvanzamento();
+            boolean r3Avanzamento = r3.isLetteraAvanzamento();
+            boolean r2Avanzamento = r2.isLetteraAvanzamento();
 
-            if (r1Avanzamento && r2Avanzamento) {
+            if (r2Avanzamento) {
                 r1.ruota();
             }
 
-            if (r2Avanzamento) {
+            if (r3Avanzamento || r2Avanzamento) {
                 r2.ruota();
             }
 
             r3.ruota();
 
-            char x = r1.cifraAvanti(c);
+
+
+            char x = r3.cifraAvanti(c);
             x = r2.cifraAvanti(x);
-            x = r3.cifraAvanti(x);
+            x = r1.cifraAvanti(x);
 
             x = riflessore.rifletti(x);
 
-            x = r3.cifraIndietro(x);
-            x = r2.cifraIndietro(x);
             x = r1.cifraIndietro(x);
+            x = r2.cifraIndietro(x);
+            x = r3.cifraIndietro(x);
 
             decifrato += x;
         }
