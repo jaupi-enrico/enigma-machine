@@ -1,6 +1,9 @@
 package com.enigma.enigmamachine.model;
 
 import org.junit.jupiter.api.Test;
+
+import java.lang.ref.Reference;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class RotorTest {
@@ -22,34 +25,45 @@ class RotorTest {
         Rotor r1 = Rotor.creaRotore1();
         Rotor r2 = Rotor.creaRotore2();
         Rotor r3 = Rotor.creaRotore3();
-        //Riflessore
+        Reflector riflessore = Reflector.creaUKW_B();
 
         String input = "CIAOTECHEGUARDIQUESTOCODICE";
         String cifrato = "";
 
         for (char c : input.toCharArray()) {
 
-            boolean r1Avanzamento = r1.isLetteraAvanzamento();
-            boolean r2Avanzamento = r2.isLetteraAvanzamento();
+            boolean r3Avanzamento = r3.isLetteraAvanzamento(); // fast
+            boolean r2Avanzamento = r2.isLetteraAvanzamento(); // middle
 
             if (r2Avanzamento) {
-                r2.ruota();
-                r3.ruota();
-            } else if (r1Avanzamento) {
+                r1.ruota();
+            }
+
+            if (r3Avanzamento || r2Avanzamento) {
                 r2.ruota();
             }
 
-            r1.ruota();
+            r3.ruota();
 
-            char x = r1.cifraAvanti(c);
+            System.out.println((char) (r1.getPosizioneAttuale() + 'A') + "" + (char) (r2.getPosizioneAttuale() + 'A') + "" + (char) (r3.getPosizioneAttuale() + 'A'));
+
+
+            char x = r3.cifraAvanti(c);
+            System.out.println(x);
             x = r2.cifraAvanti(x);
-            x = r3.cifraAvanti(x);
+            System.out.println(x);
+            x = r1.cifraAvanti(x);
+            System.out.println(x);
 
-            //riflessore
+            x = riflessore.rifletti(x);
+            System.out.println(x);
 
-            x = r3.cifraIndietro(x);
-            x = r2.cifraIndietro(x);
             x = r1.cifraIndietro(x);
+            System.out.println(x);
+            x = r2.cifraIndietro(x);
+            System.out.println(x);
+            x = r3.cifraIndietro(x);
+            System.out.println(x);
 
             cifrato += x;
         }
@@ -61,24 +75,24 @@ class RotorTest {
         String decifrato = "";
 
         for (char c : cifrato.toCharArray()) {
+            boolean r2Avanzamento = r3.isLetteraAvanzamento();
+            boolean r1Avanzamento = r2.isLetteraAvanzamento();
 
-            boolean r1Avanzamento = r1.isLetteraAvanzamento();
-            boolean r2Avanzamento = r2.isLetteraAvanzamento();
+            if (r1Avanzamento && r2Avanzamento) {
+                r1.ruota();
+            }
 
             if (r2Avanzamento) {
                 r2.ruota();
-                r3.ruota();
-            } else if (r1Avanzamento) {
-                r2.ruota();
             }
 
-            r1.ruota();
+            r3.ruota();
 
             char x = r1.cifraAvanti(c);
             x = r2.cifraAvanti(x);
             x = r3.cifraAvanti(x);
 
-            //riflessore
+            x = riflessore.rifletti(x);
 
             x = r3.cifraIndietro(x);
             x = r2.cifraIndietro(x);
