@@ -87,15 +87,15 @@ public class Rotor {
         return indiceRing;
     }
 
-    static public Rotor creaRotore1(int pos) {
-        return new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'Q', pos, 0);
+    static public Rotor creaRotore1() {
+        return new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'Q', 0, 0);
     }
 
-    static public Rotor creaRotore2(int pos) {
-        return new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'E', pos, 0);
+    static public Rotor creaRotore2() {
+        return new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'E', 0, 0);
     }
 
-    static public Rotor creaRotore3(int pos) {
-        return new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'V', pos, 0);
+    static public Rotor creaRotore3() {
+        return new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'V', 0, 0);
     }
 }
