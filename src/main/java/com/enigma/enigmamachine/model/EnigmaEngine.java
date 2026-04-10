@@ -49,4 +49,19 @@ public class EnigmaEngine {
         return letteraDaCifrare;
     }
 
+    public void setPosizione(int indiceRotore, char lettera) {
+        rotori.get(indiceRotore).setPosizioneAttuale(lettera - 'a');
+    }
+
+    public void setIndiceRing(int indiceRotore, char lettera) {
+        rotori.get(indiceRotore).setIndiceRing(lettera - 'a');
+    }
+
+    public char getPosizione(int indiceRotore, char lettera) {
+        return (char) (rotori.get(indiceRotore).getPosizioneAttuale() + 'a');
+    }
+
+    public char getIndiceRing(int indiceRotore, char lettera) {
+        return (char) (rotori.get(indiceRotore).getIndiceRing() + 'a');
+    }
 }
