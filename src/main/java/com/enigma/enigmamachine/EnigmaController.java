@@ -97,51 +97,44 @@ public class EnigmaController {
     }
 
     private void onPlugButtonClick(char lettera) {
-        PlugBoard plugBoard = new PlugBoard();
         int index = lettera - 'A';
 
-        // Se la lettera è già collegata, rimuovi la coppia
-        char partner = plugBoard.codifica(lettera);
+        char partner = macchina.getCoppia(lettera);
         if (partner != lettera) {
-            // Decolora entrambi i bottoni della coppia
             plugButtons[index].setStyle("");
             plugButtons[partner - 'A'].setStyle("");
-            plugBoard.rimuoviCoppia(lettera);
-            // Se stava aspettando proprio questa come seconda scelta, annulla la selezione
+            macchina.rimuoviCoppia(lettera);
+            macchina.rimuoviCoppia(partner);
             if (primaLetteraSelezionata != null && primaLetteraSelezionata == lettera) {
                 primaLetteraSelezionata = null;
             }
             return;
         }
 
-        // Nessuna lettera selezionata ancora → prima scelta
         if (primaLetteraSelezionata == null) {
             primaLetteraSelezionata = lettera;
             plugButtons[index].setStyle("-fx-background-color: orange;");
             return;
         }
 
-        // Stessa lettera cliccata di nuovo → deseleziona
         if (primaLetteraSelezionata == lettera) {
             primaLetteraSelezionata = null;
             plugButtons[index].setStyle("");
             return;
         }
 
-        // Seconda lettera scelta → crea la coppia
-        boolean successo = plugBoard.aggiungiCoppia(primaLetteraSelezionata, lettera);
+        boolean successo = macchina.aggiungiCoppia(primaLetteraSelezionata, lettera);
         if (successo) {
-            plugButtons[primaLetteraSelezionata - 'A'].setStyle("-fx-background-color: lightblue;");
-            plugButtons[index].setStyle("-fx-background-color: lightblue;");
+            String colore = macchina.getColoreCoppia();
+            plugButtons[primaLetteraSelezionata - 'A'].setStyle("-fx-background-color: " + colore + ";");
+            plugButtons[index].setStyle("-fx-background-color: " + colore + ";");
         }
-        // Se fallisce (non dovrebbe con i controlli sopra) non fa nulla
         primaLetteraSelezionata = null;
     }
 
     private void cifratura(char lettera) {
-        char cifrata = macchina.cifraLettera(lettera); // adatta al metodo reale di EnigmaEngine
+        char cifrata = macchina.cifraLettera(lettera);
         int outputIndex = cifrata - 'A';
-        // Accendi la label corrispondente alla lettera cifrata
         spegniTutteLeLuci();
         labels[outputIndex].setStyle("-fx-background-color: yellow;");
         System.out.println(lettera + " -> " + cifrata);
@@ -155,7 +148,6 @@ public class EnigmaController {
 
     public void onKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode().isLetterKey()) {
-            // getCode().toString() restituisce il nome del tasto (es. "A"), sempre maiuscolo
             char lettera = keyEvent.getCode().toString().charAt(0);
             int pos = lettera - 'A';
             if (pos >= 0 && pos < 26) {

@@ -5,9 +5,13 @@ import java.util.ArrayList;
 public class EnigmaEngine {
     ArrayList<Rotor> rotori;
     Reflector reflector;
+    PlugBoard plugBoard;
+    int numeroCoppie;
     public EnigmaEngine() {
         rotori = new ArrayList<>(3);
         reflector = Reflector.creaUKW_B();
+        plugBoard = new PlugBoard();
+        numeroCoppie = 0;
 
         rotori.add(Rotor.creaRotore1());
         rotori.add(Rotor.creaRotore2());
@@ -17,6 +21,8 @@ public class EnigmaEngine {
     public EnigmaEngine(Rotor r1, Rotor r2, Rotor r3) {
         rotori = new ArrayList<>(3);
         reflector = Reflector.creaUKW_B();
+        plugBoard = new PlugBoard();
+        numeroCoppie = 0;
 
         rotori.add(r1);
         rotori.add(r2);
@@ -24,6 +30,8 @@ public class EnigmaEngine {
     }
 
     public char cifraLettera(char letteraDaCifrare) {
+        letteraDaCifrare = plugBoard.codifica(letteraDaCifrare);
+
         boolean r3Avanzamento = rotori.get(2).isLetteraAvanzamento();
         boolean r2Avanzamento = rotori.get(1).isLetteraAvanzamento();
 
@@ -63,5 +71,40 @@ public class EnigmaEngine {
 
     public char getIndiceRing(int indiceRotore, char lettera) {
         return (char) (rotori.get(indiceRotore).getIndiceRing() + 'a');
+    }
+
+    public boolean aggiungiCoppia(char letteraIdx, char lettera) {
+        return plugBoard.aggiungiCoppia(letteraIdx, lettera);
+    }
+
+    public boolean rimuoviCoppia(char lettera) {
+        return plugBoard.rimuoviCoppia(lettera);
+    }
+
+    public char getCoppia(char lettera) {
+        return plugBoard.codifica(lettera);
+    }
+
+    public String getColoreCoppia() {
+        String colore;
+        switch (numeroCoppie) {
+            case 0  -> { colore = "lightblue"; }
+            case 1  -> { colore = "#FF6B6B"; }
+            case 2  -> { colore = "#FF9F43"; }
+            case 3  -> { colore = "#FFEAA7"; }
+            case 4  -> { colore = "#A8E6CF"; }
+            case 5  -> { colore = "#6BCB77"; }
+            case 6  -> { colore = "#4D96FF"; }
+            case 7  -> { colore = "#845EC2"; }
+            case 8  -> { colore = "#FF85A1"; }
+            case 9  -> { colore = "#00C9A7"; }
+            case 10 -> { colore = "#F9C74F"; }
+            case 11 -> { colore = "#F4845F"; }
+            case 12 -> { colore = "#90E0EF"; }
+            case 13 -> { colore = "#B5E48C"; }
+            default -> { colore = ""; }
+        }
+        numeroCoppie++;
+        return colore;
     }
 }
