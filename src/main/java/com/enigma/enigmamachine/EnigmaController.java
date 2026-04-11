@@ -1,69 +1,159 @@
 package com.enigma.enigmamachine;
 
 import com.enigma.enigmamachine.model.EnigmaEngine;
+import com.enigma.enigmamachine.model.PlugBoard;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
 public class EnigmaController {
     EnigmaEngine macchina;
 
-    @FXML
-    private GridPane gridButton;
+    @FXML private GridPane gridButton;
+    @FXML private GridPane gridLight;
+    @FXML private GridPane gridPlugBoard;
 
     private Button[] buttons;
+    private Label[] labels;
+    private Button[] plugButtons;
+    private Character primaLetteraSelezionata = null;
+
+
     @FXML
     void initialize() {
         macchina = new EnigmaEngine();
+        creaGridButton();
+        creaGridLight();
+        creaGridPlugBoard();
+    }
 
-        //Crea il vettore di bottoni
+    private void creaGridButton() {
         buttons = new Button[26];
-        //Inizializza alla prima lettera, cioè la A
         char lettera = 'A';
-        //Imposta le dimensioni dei separatori della griglia
         gridButton.setHgap(10);
         gridButton.setVgap(10);
-        //Scorre ogni riga della tastiera
+
         for (int i = 0; i < 3; i++) {
-            //Per ogni riga aggiunge 9 bottoni, fino ad arrivare alla Z
             for (int j = 0; j < 9; j++) {
-                //Crea il nuovo bottone con la lettera corrispondente
-                buttons[i * 9 + j] = new Button("" + lettera);
-                //Stabilisce la dimensione del bottone in modo che occupi 1/10 dello spazio disponibile
-                buttons[i * 9 + j].setPrefWidth(800.0 / 10);
-                //Variabile finale per poter essere usata all'interno della lambda
+                int index = i * 9 + j;
+                if (index >= 26) return;
+
+                buttons[index] = new Button("" + lettera);
+                buttons[index].setPrefWidth(800.0 / 10);
+
                 final char finalLettera = lettera;
-                //Aggiunge un evento al bottone che stampa la lettera corrispondente quando viene premuto
-                //Il bottone viene identificato tramite l'evento e la lettera viene stampata tramite la variabile finale
-                //Nella versione definitiva, invece di stampare la lettera, verrà chiamato il metodo per criptare la lettera e visualizzare il risultato
-                buttons[i * 9 + j].setOnAction(e -> {
-                    System.out.println(e.getSource());
-                    System.out.println(finalLettera);
-                });
-                //Aggiunge il bottone alla griglia nella posizione corrispondente
-                gridButton.add(buttons[i * 9 + j], j, i, 1, 1);
-                //Incrementa la lettera per passare alla successiva
+                buttons[index].setOnAction(e -> cifratura(finalLettera));
+
+                gridButton.add(buttons[index], j, i, 1, 1);
                 lettera++;
-                //Se la lettera è arrivata alla Z, esce dal ciclo
-                //Ovviamente si potrebbe anche aggiungere ad esempio il carattere per lo spazio
-                //ma, per quanto detto, non verrebbe usato
-                if (lettera == '[') return;
             }
         }
     }
 
+    private void creaGridLight() {
+        labels = new Label[26];
+        char lettera = 'A';
+        gridLight.setHgap(10);
+        gridLight.setVgap(10);
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; j++) {
+                int index = i * 9 + j;
+                if (index >= 26) return;
+
+                labels[index] = new Label("" + lettera);
+                labels[index].setPrefWidth(800.0 / 10);
+                gridLight.add(labels[index], j, i, 1, 1);
+                lettera++;
+            }
+        }
+    }
+
+    private void creaGridPlugBoard() {
+        plugButtons = new Button[26];
+
+        gridPlugBoard.setHgap(10);
+        gridPlugBoard.setVgap(10);
+
+        char lettera = 'A';
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; j++) {
+                int index = i * 9 + j;
+                if (index >= 26) return;
+
+                Button btn = new Button("" + lettera);
+                btn.setPrefWidth(800.0 / 10);
+                plugButtons[index] = btn;
+
+                final char finalLettera = lettera;
+                btn.setOnAction(e -> onPlugButtonClick(finalLettera));
+
+                gridPlugBoard.add(btn, j, i, 1, 1);
+                lettera++;
+            }
+        }
+    }
+
+    private void onPlugButtonClick(char lettera) {
+        int index = lettera - 'A';
+
+        char partner = macchina.getCoppia(lettera);
+        if (partner != lettera) {
+            plugButtons[index].setStyle("");
+            plugButtons[partner - 'A'].setStyle("");
+            macchina.rimuoviCoppia(lettera);
+            macchina.rimuoviCoppia(partner);
+            if (primaLetteraSelezionata != null && primaLetteraSelezionata == lettera) {
+                primaLetteraSelezionata = null;
+            }
+            return;
+        }
+
+        if (primaLetteraSelezionata == null) {
+            primaLetteraSelezionata = lettera;
+            plugButtons[index].setStyle("-fx-background-color: orange;");
+            return;
+        }
+
+        if (primaLetteraSelezionata == lettera) {
+            primaLetteraSelezionata = null;
+            plugButtons[index].setStyle("");
+            return;
+        }
+
+        boolean successo = macchina.aggiungiCoppia(primaLetteraSelezionata, lettera);
+        if (successo) {
+            String colore = macchina.getColoreCoppia();
+            plugButtons[primaLetteraSelezionata - 'A'].setStyle("-fx-background-color: " + colore + ";");
+            plugButtons[index].setStyle("-fx-background-color: " + colore + ";");
+        }
+        primaLetteraSelezionata = null;
+    }
+
+    private void cifratura(char lettera) {
+        char cifrata = macchina.cifraLettera(lettera);
+        int outputIndex = cifrata - 'A';
+        spegniTutteLeLuci();
+        labels[outputIndex].setStyle("-fx-background-color: yellow;");
+        System.out.println(lettera + " -> " + cifrata);
+    }
+
+    private void spegniTutteLeLuci() {
+        for (Label l : labels) {
+            if (l != null) l.setStyle("");
+        }
+    }
+
     public void onKeyPressed(KeyEvent keyEvent) {
-        //Controlla se il tasto premuto è una lettera
         if (keyEvent.getCode().isLetterKey()) {
-            //Calcola l'indice nel vettore del bottone corrispondente alla lettera premuta
-            int pos = (keyEvent.getCode().getChar().charAt(0) - 'A');
-            //Simula la pressione del bottone corrispondente alla lettera premuta
-            buttons[pos].fire();
-            //Mette a fuoco il bottone corrispondente alla lettera premuta per evidenziarlo
-            buttons[pos].requestFocus();
-            //Stampa la posizione del bottone premuto (opzionale, per debug)
-            System.out.println("" + pos);
+            char lettera = keyEvent.getCode().toString().charAt(0);
+            int pos = lettera - 'A';
+            if (pos >= 0 && pos < 26) {
+                buttons[pos].fire();
+                buttons[pos].requestFocus();
+            }
         }
     }
 }
