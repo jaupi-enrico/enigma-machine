@@ -18,15 +18,10 @@ public class EnigmaEngine {
         rotori.add(Rotor.creaRotore3());
     }
 
-    public EnigmaEngine(Rotor r1, Rotor r2, Rotor r3) {
-        rotori = new ArrayList<>(3);
-        reflector = Reflector.creaUKW_B();
-        plugBoard = new PlugBoard();
-        numeroCoppie = 0;
-
-        rotori.add(r1);
-        rotori.add(r2);
-        rotori.add(r3);
+    public void swapRotori(int idxA, int idxB) {
+        Rotor tmp = rotori.get(idxA);
+        rotori.set(idxA, rotori.get(idxB));
+        rotori.set(idxB, tmp);
     }
 
     public char cifraLettera(char letteraDaCifrare) {
@@ -57,19 +52,21 @@ public class EnigmaEngine {
         return letteraDaCifrare;
     }
 
-    public void setPosizione(int indiceRotore, char lettera) {
-        rotori.get(indiceRotore).setPosizioneAttuale(lettera - 'a');
+    public void setPosizione(int indiceRotore, int delta) {
+        rotori.get(indiceRotore).setPosizioneAttuale(rotori.get(indiceRotore).getPosizioneAttuale() + delta);
     }
 
     public void setIndiceRing(int indiceRotore, char lettera) {
         rotori.get(indiceRotore).setIndiceRing(lettera - 'a');
     }
 
-    public char getPosizione(int indiceRotore, char lettera) {
-        return (char) (rotori.get(indiceRotore).getPosizioneAttuale() + 'a');
+    public char getPosizione(int indiceRotore, int delta) {
+        return (char) (
+                ((rotori.get(indiceRotore).getPosizioneAttuale() + delta) % rotori.get(indiceRotore).getSizeAlfabeto()
+                        + rotori.get(indiceRotore).getSizeAlfabeto()) % rotori.get(indiceRotore).getSizeAlfabeto() + 'a');
     }
 
-    public char getIndiceRing(int indiceRotore, char lettera) {
+    public char getIndiceRing(int indiceRotore) {
         return (char) (rotori.get(indiceRotore).getIndiceRing() + 'a');
     }
 
