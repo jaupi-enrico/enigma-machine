@@ -5,6 +5,7 @@ import com.enigma.enigmamachine.model.PlugBoard;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
@@ -20,6 +21,18 @@ public class EnigmaController {
     private Button[] plugButtons;
     private Character primaLetteraSelezionata = null;
 
+    @FXML private Label nextRotore1;
+    @FXML private Label nextRotore2;
+    @FXML private Label nextRotore3;
+    @FXML private Label attualeRotore1;
+    @FXML private Label attualeRotore2;
+    @FXML private Label attualeRotore3;
+    @FXML private Label previousRotore1;
+    @FXML private Label previousRotore2;
+    @FXML private Label previousRotore3;
+
+    @FXML private TextArea inputTextArea;
+    @FXML private TextArea outputTextArea;
 
     @FXML
     void initialize() {
@@ -27,6 +40,7 @@ public class EnigmaController {
         creaGridButton();
         creaGridLight();
         creaGridPlugBoard();
+        updateLabelsRotori();
     }
 
     private void creaGridButton() {
@@ -134,10 +148,16 @@ public class EnigmaController {
 
     private void cifratura(char lettera) {
         char cifrata = macchina.cifraLettera(lettera);
+
         int outputIndex = cifrata - 'A';
         spegniTutteLeLuci();
         labels[outputIndex].setStyle("-fx-background-color: yellow;");
-        System.out.println(lettera + " -> " + cifrata);
+        if (inputTextArea.getText().replace(" ", "").length() % 5 == 0 && !inputTextArea.getText().isEmpty()) {
+            inputTextArea.appendText(" ");
+            outputTextArea.appendText(" ");
+        }
+        inputTextArea.appendText(String.valueOf(lettera));
+        outputTextArea.appendText(String.valueOf(cifrata));
     }
 
     private void spegniTutteLeLuci() {
@@ -155,5 +175,42 @@ public class EnigmaController {
                 buttons[pos].requestFocus();
             }
         }
+    }
+
+    private void updateLabelsRotori() {
+        attualeRotore1.setText(String.valueOf(macchina.getPosizione(0, 0)));
+        attualeRotore2.setText(String.valueOf(macchina.getPosizione(1, 0)));
+        attualeRotore3.setText(String.valueOf(macchina.getPosizione(2, 0)));
+        nextRotore1.setText(String.valueOf(macchina.getPosizione(0, 1)));
+        nextRotore2.setText(String.valueOf(macchina.getPosizione(1, 1)));
+        nextRotore3.setText(String.valueOf(macchina.getPosizione(2, 1)));
+        previousRotore1.setText(String.valueOf(macchina.getPosizione(0, -1)));
+        previousRotore2.setText(String.valueOf(macchina.getPosizione(1, -1)));
+        previousRotore3.setText(String.valueOf(macchina.getPosizione(2, -1)));
+    }
+
+    public void nextPosRotore1() {
+        macchina.setPosizione(0, 1);
+        updateLabelsRotori();
+    }
+    public void nextPosRotore2() {
+        macchina.setPosizione(1, 1);
+        updateLabelsRotori();
+    }
+    public void nextPosRotore3() {
+        macchina.setPosizione(2, 1);
+        updateLabelsRotori();
+    }
+    public void previousPosRotore1() {
+        macchina.setPosizione(0, -1);
+        updateLabelsRotori();
+    }
+    public void previousPosRotore2() {
+        macchina.setPosizione(1, -1);
+        updateLabelsRotori();
+    }
+    public void previousPosRotore3() {
+        macchina.setPosizione(2, -1);
+        updateLabelsRotori();
     }
 }

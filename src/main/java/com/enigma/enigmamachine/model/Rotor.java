@@ -87,6 +87,10 @@ public class Rotor {
         return indiceRing;
     }
 
+    public int getSizeAlfabeto() {
+        return sizeAlfabeto;
+    }
+
     static public Rotor creaRotore1() {
         return new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'Q', 0, 0);
     }
