@@ -99,6 +99,7 @@ public class EnigmaController {
         char lettera = 'A';
         gridButton.setHgap(10);
         gridButton.setVgap(10);
+        gridButton.getColumnConstraints().clear();
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
@@ -107,6 +108,19 @@ public class EnigmaController {
 
                 buttons[index] = new Button("" + lettera);
                 buttons[index].setPrefWidth(800.0 / 10);
+
+                buttons[index].setStyle("-fx-background-color: #25292A; " +
+                        "-fx-text-fill: #ffffff; " +
+                        "-fx-font-size: 12; " +
+                        "-fx-font-family: 'Courier new'; " +
+                        "-fx-border-radius: 50; " +
+                        "-fx-border-width: 2; " +
+                        "-fx-border-color: #666666; " +
+                        "-fx-cursor: hand; " +
+                        "-fx-font-weight: bold; ");
+                buttons[index].setPrefSize(40, 40);
+                buttons[index].setMaxSize(40, 40);
+                buttons[index].setMinSize(40, 40);
 
                 final char finalLettera = lettera;
                 buttons[index].setOnAction(e -> cifratura(finalLettera));
@@ -122,6 +136,7 @@ public class EnigmaController {
         char lettera = 'A';
         gridLight.setHgap(10);
         gridLight.setVgap(10);
+        gridLight.getColumnConstraints().clear();
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
@@ -130,6 +145,18 @@ public class EnigmaController {
 
                 labels[index] = new Label("" + lettera);
                 labels[index].setPrefWidth(800.0 / 10);
+
+                labels[index].setStyle("-fx-padding: 5; " +
+                        "-fx-background-color: #ffffff; " +
+                        "-fx-border-radius: 50; " +
+                        "-fx-background-radius: 50; " +
+                        "-fx-text-fill: #000000; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-font-size: 12; " +
+                        "-fx-font-family: 'Courier New'; " +
+                        "-fx-border-color: #555555; " +
+                        "-fx-border-width: 2; ");
+
                 gridLight.add(labels[index], j, i, 1, 1);
                 lettera++;
             }
@@ -141,6 +168,7 @@ public class EnigmaController {
 
         gridPlugBoard.setHgap(10);
         gridPlugBoard.setVgap(10);
+        gridPlugBoard.getColumnConstraints().clear();
 
         char lettera = 'A';
         for (int i = 0; i < 3; i++) {
@@ -203,7 +231,16 @@ public class EnigmaController {
 
         int outputIndex = cifrata - 'A';
         spegniTutteLeLuci();
-        labels[outputIndex].setStyle("-fx-background-color: yellow;");
+        labels[outputIndex].setStyle("-fx-padding: 5; " +
+                "-fx-background-color: yellow; " +
+                "-fx-border-radius: 50; " +
+                "-fx-background-radius: 50; " +
+                "-fx-text-fill: #000000; " +
+                "-fx-font-weight: bold; " +
+                "-fx-font-size: 12; " +
+                "-fx-font-family: 'Courier New'; " +
+                "-fx-border-color: #555555; " +
+                "-fx-border-width: 2; ");
         if (inputTextArea.getText().replace(" ", "").length() % 5 == 0 && !inputTextArea.getText().isEmpty()) {
             inputTextArea.appendText(" ");
             outputTextArea.appendText(" ");
@@ -214,7 +251,16 @@ public class EnigmaController {
 
     private void spegniTutteLeLuci() {
         for (Label l : labels) {
-            if (l != null) l.setStyle("");
+            if (l != null) l.setStyle("-fx-padding: 5; " +
+                    "-fx-background-color: #ffffff; " +
+                    "-fx-border-radius: 50; " +
+                    "-fx-background-radius: 50; " +
+                    "-fx-text-fill: #000000; " +
+                    "-fx-font-weight: bold; " +
+                    "-fx-font-size: 12; " +
+                    "-fx-font-family: 'Courier New'; " +
+                    "-fx-border-color: #555555; " +
+                    "-fx-border-width: 2; ");
         }
     }
 
