@@ -49,12 +49,55 @@ public class EnigmaController {
             int col = i * 2;
 
             Label title = new Label("ROTOR " + (i + 1));
+            title.setStyle("-fx-text-fill: #888888; " +
+                    "-fx-font-size: 10; " +
+                    "-fx-font-family: 'Courier New'; " +
+                    "-fx-font-weight: bold; " +
+                    "-fx-alignment: center; ");
 
             Label next = new Label();
+            next.setStyle("-fx-background-color: #1a1d1e; " +
+                    "-fx-text-fill: #888888; " +
+                    "-fx-font-size: 11; " +
+                    "-fx-font-family: 'Courier New'; " +
+                    "-fx-font-weight: bold; " +
+                    "-fx-border-radius: 50; " +
+                    "-fx-background-radius: 50; " +
+                    "-fx-border-width: 1; " +
+                    "-fx-border-color: #444444; " +
+                    "-fx-padding: 4; " +
+                    "-fx-min-width: 32; -fx-min-height: 32; " +
+                    "-fx-alignment: center; " +
+                    "-fx-cursor: hand; ");
 
             Label curr = new Label();
+            curr.setStyle("-fx-background-color: #25292A; " +
+                    "-fx-text-fill: #ffffff; " +
+                    "-fx-font-size: 14; " +
+                    "-fx-font-family: 'Courier New'; " +
+                    "-fx-font-weight: bold; " +
+                    "-fx-border-radius: 50; " +
+                    "-fx-background-radius: 50; " +
+                    "-fx-border-width: 2; " +
+                    "-fx-border-color: #666666; " +
+                    "-fx-padding: 6; " +
+                    "-fx-min-width: 40; -fx-min-height: 40; " +
+                    "-fx-alignment: center; ");
 
             Label prev = new Label();
+            prev.setStyle("-fx-background-color: #1a1d1e; " +
+                    "-fx-text-fill: #888888; " +
+                    "-fx-font-size: 11; " +
+                    "-fx-font-family: 'Courier New'; " +
+                    "-fx-font-weight: bold; " +
+                    "-fx-border-radius: 50; " +
+                    "-fx-background-radius: 50; " +
+                    "-fx-border-width: 1; " +
+                    "-fx-border-color: #444444; " +
+                    "-fx-padding: 4; " +
+                    "-fx-min-width: 32; -fx-min-height: 32; " +
+                    "-fx-alignment: center; " +
+                    "-fx-cursor: hand; ");
 
             rotoriLabels[i][0] = prev;
             rotoriLabels[i][1] = curr;
@@ -65,6 +108,64 @@ public class EnigmaController {
             next.setOnMouseClicked(e -> { macchina.setPosizione(index, 1);  updateLabelsRotori(); });
             prev.setOnMouseClicked(e -> { macchina.setPosizione(index, -1); updateLabelsRotori(); });
 
+            next.setOnMouseEntered(e -> next.setStyle("-fx-background-color: #1a1d1e; " +
+                    "-fx-text-fill: #888888; " +
+                    "-fx-font-size: 11; " +
+                    "-fx-font-family: 'Courier New'; " +
+                    "-fx-font-weight: bold; " +
+                    "-fx-border-radius: 50; " +
+                    "-fx-background-radius: 50; " +
+                    "-fx-border-width: 1; " +
+                    "-fx-border-color: #444444; " +
+                    "-fx-padding: 4; " +
+                    "-fx-min-width: 32; -fx-min-height: 32; " +
+                    "-fx-alignment: center; " +
+                    "-fx-cursor: hand; " + "-fx-text-fill: #cccccc; -fx-border-color: #888888;"));
+            next.setOnMouseExited(e  -> next.setStyle("-fx-background-color: #1a1d1e; " +
+                    "-fx-text-fill: #888888; " +
+                    "-fx-font-size: 11; " +
+                    "-fx-font-family: 'Courier New'; " +
+                    "-fx-font-weight: bold; " +
+                    "-fx-border-radius: 50; " +
+                    "-fx-background-radius: 50; " +
+                    "-fx-border-width: 1; " +
+                    "-fx-border-color: #444444; " +
+                    "-fx-padding: 4; " +
+                    "-fx-min-width: 32; -fx-min-height: 32; " +
+                    "-fx-alignment: center; " +
+                    "-fx-cursor: hand; "));
+            prev.setOnMouseEntered(e -> prev.setStyle("-fx-background-color: #1a1d1e; " +
+                    "-fx-text-fill: #888888; " +
+                    "-fx-font-size: 11; " +
+                    "-fx-font-family: 'Courier New'; " +
+                    "-fx-font-weight: bold; " +
+                    "-fx-border-radius: 50; " +
+                    "-fx-background-radius: 50; " +
+                    "-fx-border-width: 1; " +
+                    "-fx-border-color: #444444; " +
+                    "-fx-padding: 4; " +
+                    "-fx-min-width: 32; -fx-min-height: 32; " +
+                    "-fx-alignment: center; " +
+                    "-fx-cursor: hand; " + "-fx-text-fill: #cccccc; -fx-border-color: #888888;"));
+            prev.setOnMouseExited(e  -> prev.setStyle("-fx-background-color: #1a1d1e; " +
+                    "-fx-text-fill: #888888; " +
+                    "-fx-font-size: 11; " +
+                    "-fx-font-family: 'Courier New'; " +
+                    "-fx-font-weight: bold; " +
+                    "-fx-border-radius: 50; " +
+                    "-fx-background-radius: 50; " +
+                    "-fx-border-width: 1; " +
+                    "-fx-border-color: #444444; " +
+                    "-fx-padding: 4; " +
+                    "-fx-min-width: 32; -fx-min-height: 32; " +
+                    "-fx-alignment: center; " +
+                    "-fx-cursor: hand; "));
+
+            GridPane.setHalignment(title, javafx.geometry.HPos.CENTER);
+            GridPane.setHalignment(next,  javafx.geometry.HPos.CENTER);
+            GridPane.setHalignment(curr,  javafx.geometry.HPos.CENTER);
+            GridPane.setHalignment(prev,  javafx.geometry.HPos.CENTER);
+
             gridRotori.add(title, col, 0);
             gridRotori.add(next,  col, 1);
             gridRotori.add(curr,  col, 2);
@@ -72,6 +173,13 @@ public class EnigmaController {
 
             if (i < n - 1) {
                 Button swapBtn = new Button("⇄");
+                swapBtn.setStyle("-fx-background-color: #1a1d1e; " +
+                        "-fx-text-fill: #666666; " +
+                        "-fx-font-size: 14; " +
+                        "-fx-border-width: 1; " +
+                        "-fx-border-color: #444444; " +
+                        "-fx-cursor: hand; " +
+                        "-fx-padding: 4 8; ");
 
                 final int idxA = i;
                 swapBtn.setOnAction(e -> {
@@ -114,6 +222,7 @@ public class EnigmaController {
                         "-fx-font-size: 12; " +
                         "-fx-font-family: 'Courier new'; " +
                         "-fx-border-radius: 50; " +
+                        "-fx-background-radius: 50; " +
                         "-fx-border-width: 2; " +
                         "-fx-border-color: #666666; " +
                         "-fx-cursor: hand; " +
