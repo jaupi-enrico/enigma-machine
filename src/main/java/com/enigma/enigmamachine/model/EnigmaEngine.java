@@ -70,6 +70,10 @@ public class EnigmaEngine {
         return (char) (rotori.get(indiceRotore).getIndiceRing() + 'a');
     }
 
+    public int getSizeRotori() {
+        return rotori.size();
+    }
+
     public boolean aggiungiCoppia(char letteraIdx, char lettera) {
         return plugBoard.aggiungiCoppia(letteraIdx, lettera);
     }
