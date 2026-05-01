@@ -57,17 +57,17 @@ public class EnigmaEngine {
     }
 
     public void setIndiceRing(int indiceRotore, char lettera) {
-        rotori.get(indiceRotore).setIndiceRing(lettera - 'a');
+        rotori.get(indiceRotore).setIndiceRing(lettera - 'A');
     }
 
     public char getPosizione(int indiceRotore, int delta) {
         return (char) (
                 ((rotori.get(indiceRotore).getPosizioneAttuale() + delta) % rotori.get(indiceRotore).getSizeAlfabeto()
-                        + rotori.get(indiceRotore).getSizeAlfabeto()) % rotori.get(indiceRotore).getSizeAlfabeto() + 'a');
+                        + rotori.get(indiceRotore).getSizeAlfabeto()) % rotori.get(indiceRotore).getSizeAlfabeto() + 'A');
     }
 
     public char getIndiceRing(int indiceRotore) {
-        return (char) (rotori.get(indiceRotore).getIndiceRing() + 'a');
+        return (char) (rotori.get(indiceRotore).getIndiceRing() + 'A');
     }
 
     public int getSizeRotori() {
@@ -105,7 +105,7 @@ public class EnigmaEngine {
             case 13 -> { colore = "#B5E48C"; }
             default -> { colore = ""; }
         }
-        numeroCoppie++;
+        numeroCoppie = (numeroCoppie + 1) % 14;
         return colore;
     }
 }
