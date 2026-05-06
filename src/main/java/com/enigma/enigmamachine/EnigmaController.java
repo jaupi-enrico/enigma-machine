@@ -26,6 +26,136 @@ public class EnigmaController {
     @FXML private TextArea inputTextArea;
     @FXML private TextArea outputTextArea;
 
+    private static final String STILE_ROTORE_TITOLO =
+            "-fx-text-fill: #888888; " +
+            "-fx-font-size: 12; " +
+            "-fx-font-family: 'Courier New'; " +
+            "-fx-font-weight: bold; " +
+            "-fx-alignment: center; ";
+
+    private static final String STILE_ROTORE_CORRENTE =
+            "-fx-background-color: #25292A; " +
+            "-fx-text-fill: #ffffff; " +
+            "-fx-font-size: 16; " +
+            "-fx-font-family: 'Courier New'; " +
+            "-fx-font-weight: bold; " +
+            "-fx-border-radius: 50; " +
+            "-fx-background-radius: 50; " +
+            "-fx-border-width: 2; " +
+            "-fx-border-color: #666666; " +
+            "-fx-padding: 6; " +
+            "-fx-min-width: 45; -fx-min-height: 45; " +
+            "-fx-alignment: center; ";
+
+    private static final String STILE_ROTORE_BOTTONE =
+            "-fx-background-color: #1a1d1e; " +
+            "-fx-text-fill: #888888; " +
+            "-fx-font-size: 13; " +
+            "-fx-font-family: 'Courier New'; " +
+            "-fx-font-weight: bold; " +
+            "-fx-border-radius: 50; " +
+            "-fx-background-radius: 50; " +
+            "-fx-border-width: 1; " +
+            "-fx-border-color: #444444; " +
+            "-fx-padding: 4; " +
+            "-fx-min-width: 38; -fx-min-height: 38; " +
+            "-fx-alignment: center; " +
+            "-fx-cursor: hand; ";
+
+    private static final String STILE_ROTORE_BOTTONE_SOPRA =
+            "-fx-background-color: #1a1d1e; " +
+            "-fx-text-fill: #cccccc; " +
+            "-fx-font-size: 15; " +
+            "-fx-font-family: 'Courier New'; " +
+            "-fx-font-weight: bold; " +
+            "-fx-border-radius: 50; " +
+            "-fx-background-radius: 50; " +
+            "-fx-border-width: 1; " +
+            "-fx-border-color: #888888; " +
+            "-fx-padding: 4; " +
+            "-fx-min-width: 42; -fx-min-height: 42; " +
+            "-fx-alignment: center; " +
+            "-fx-cursor: hand; ";
+
+    private static final String STILE_ROTORE_SCAMBIA =
+            "-fx-background-color: #1a1d1e; " +
+            "-fx-text-fill: #666666; " +
+            "-fx-font-size: 18; " +
+            "-fx-border-width: 1; " +
+            "-fx-border-color: #444444; " +
+            "-fx-cursor: hand; " +
+            "-fx-padding: 4 8; ";
+
+
+    private static final String STILE_BOTTONE =
+            "-fx-background-color: #25292A; " +
+            "-fx-text-fill: #ffffff; " +
+            "-fx-font-size: 16; " +
+            "-fx-font-family: 'Courier New'; " +
+            "-fx-border-radius: 50; " +
+            "-fx-background-radius: 50; " +
+            "-fx-border-width: 2; " +
+            "-fx-border-color: #666666; " +
+            "-fx-cursor: hand; " +
+            "-fx-font-weight: bold; ";
+
+    private static final String STILE_LUCE_OFF =
+            "-fx-padding: 5; " +
+            "-fx-background-color: #ffffff; " +
+            "-fx-border-radius: 50; " +
+            "-fx-background-radius: 50; " +
+            "-fx-text-fill: #000000; " +
+            "-fx-font-weight: bold; " +
+            "-fx-font-size: 14; " +
+            "-fx-font-family: 'Courier New'; " +
+            "-fx-border-color: #555555; " +
+            "-fx-border-width: 2; " +
+            "-fx-alignment: center; ";
+
+    private static final String STILE_LUCE_ON =
+            "-fx-padding: 5; " +
+            "-fx-background-color: yellow; " +
+            "-fx-border-radius: 50; " +
+            "-fx-background-radius: 50; " +
+            "-fx-text-fill: #000000; " +
+            "-fx-font-weight: bold; " +
+            "-fx-font-size: 14; " +
+            "-fx-font-family: 'Courier New'; " +
+            "-fx-border-color: #555555; " +
+            "-fx-border-width: 2; " +
+            "-fx-alignment: center; ";
+
+
+    private static final String STILE_PLUG_BASE =
+            "-fx-background-color: #000000; " +
+            "-fx-text-fill: #ffffff; " +
+            "-fx-font-size: 14; " +
+            "-fx-font-family: 'Courier New'; " +
+            "-fx-background-radius: 50; " +
+            "-fx-cursor: hand; " +
+            "-fx-font-weight: bold; ";
+
+    private static final String STILE_PLUG_SELEZIONATO =
+            "-fx-background-color: orange; " +
+            "-fx-text-fill: #000000; " +
+            "-fx-font-size: 14; " +
+            "-fx-font-family: 'Courier New'; " +
+            "-fx-background-radius: 50; " +
+            "-fx-cursor: hand; " +
+            "-fx-font-weight: bold; ";
+
+    private String stilePlugColorato(String colore) {
+            String s = "-fx-background-color: " + colore + "; " +
+                    "-fx-text-fill: #000000; " +
+                    "-fx-font-size: 14; " +
+                    "-fx-font-family: 'Courier New'; " +
+                    "-fx-background-radius: 50; " +
+                    "-fx-cursor: hand; " +
+                    "-fx-font-weight: bold; ";
+            return s;
+    }
+
+
     @FXML
     void initialize() {
         macchina = new EnigmaEngine();
@@ -47,63 +177,16 @@ public class EnigmaController {
             int col = i * 2;
 
             Label title = new Label("ROTOR " + (i + 1));
-            title.setStyle(
-                "-fx-text-fill: #888888; " +
-                "-fx-font-size: 12; " +
-                "-fx-font-family: 'Courier New'; " +
-                "-fx-font-weight: bold; " +
-                "-fx-alignment: center; "
-            );
+            title.setStyle(STILE_ROTORE_TITOLO);
 
             Label next = new Label();
-            next.setStyle(
-                "-fx-background-color: #1a1d1e; " +
-                "-fx-text-fill: #888888; " +
-                "-fx-font-size: 13; " +
-                "-fx-font-family: 'Courier New'; " +
-                "-fx-font-weight: bold; " +
-                "-fx-border-radius: 50; " +
-                "-fx-background-radius: 50; " +
-                "-fx-border-width: 1; " +
-                "-fx-border-color: #444444; " +
-                "-fx-padding: 4; " +
-                "-fx-min-width: 38; -fx-min-height: 38; " +
-                "-fx-alignment: center; " +
-                "-fx-cursor: hand; "
-            );
+            next.setStyle(STILE_ROTORE_BOTTONE);
 
             Label curr = new Label();
-            curr.setStyle(
-                "-fx-background-color: #25292A; " +
-                "-fx-text-fill: #ffffff; " +
-                "-fx-font-size: 16; " +
-                "-fx-font-family: 'Courier New'; " +
-                "-fx-font-weight: bold; " +
-                "-fx-border-radius: 50; " +
-                "-fx-background-radius: 50; " +
-                "-fx-border-width: 2; " +
-                "-fx-border-color: #666666; " +
-                "-fx-padding: 6; " +
-                "-fx-min-width: 45; -fx-min-height: 45; " +
-                "-fx-alignment: center; "
-            );
+            curr.setStyle(STILE_ROTORE_CORRENTE);
 
             Label prev = new Label();
-            prev.setStyle(
-                "-fx-background-color: #1a1d1e; " +
-                "-fx-text-fill: #888888; " +
-                "-fx-font-size: 13; " +
-                "-fx-font-family: 'Courier New'; " +
-                "-fx-font-weight: bold; " +
-                "-fx-border-radius: 50; " +
-                "-fx-background-radius: 50; " +
-                "-fx-border-width: 1; " +
-                "-fx-border-color: #444444; " +
-                "-fx-padding: 4; " +
-                "-fx-min-width: 38; -fx-min-height: 38; " +
-                "-fx-alignment: center; " +
-                "-fx-cursor: hand; "
-            );
+            prev.setStyle(STILE_ROTORE_BOTTONE);
 
             rotoriLabels[i][0] = prev;
             rotoriLabels[i][1] = curr;
@@ -111,69 +194,13 @@ public class EnigmaController {
 
             final int index = i;
 
-            next.setOnMouseClicked(e -> { macchina.setPosizione(index, 1);  updateLabelsRotori(); });
+            next.setOnMouseClicked(e -> { macchina.setPosizione(index,  1); updateLabelsRotori(); });
             prev.setOnMouseClicked(e -> { macchina.setPosizione(index, -1); updateLabelsRotori(); });
 
-            next.setOnMouseEntered(e -> next.setStyle(
-                "-fx-background-color: #1a1d1e; " +
-                "-fx-font-size: 15; " +
-                "-fx-font-family: 'Courier New'; " +
-                "-fx-font-weight: bold; " +
-                "-fx-border-radius: 50; " +
-                "-fx-background-radius: 50; " +
-                "-fx-border-width: 1; " +
-                "-fx-padding: 4; " +
-                "-fx-min-width: 42; -fx-min-height: 42; " +
-                "-fx-alignment: center; " +
-                "-fx-cursor: hand; " +
-                "-fx-text-fill: #cccccc; " +
-                "-fx-border-color: #888888;"
-            ));
-            next.setOnMouseExited(e  -> next.setStyle(
-                "-fx-background-color: #1a1d1e; " +
-                "-fx-text-fill: #888888; " +
-                "-fx-font-size: 13; " +
-                "-fx-font-family: 'Courier New'; " +
-                "-fx-font-weight: bold; " +
-                "-fx-border-radius: 50; " +
-                "-fx-background-radius: 50; " +
-                "-fx-border-width: 1; " +
-                "-fx-border-color: #444444; " +
-                "-fx-padding: 4; " +
-                "-fx-min-width: 38; -fx-min-height: 38; " +
-                "-fx-alignment: center; " +
-                "-fx-cursor: hand; "
-            ));
-            prev.setOnMouseEntered(e -> prev.setStyle(
-                "-fx-background-color: #1a1d1e; " +
-                "-fx-font-size: 15; " +
-                "-fx-font-family: 'Courier New'; " +
-                "-fx-font-weight: bold; " +
-                "-fx-border-radius: 50; " +
-                "-fx-background-radius: 50; " +
-                "-fx-border-width: 1; " +
-                "-fx-padding: 4; " +
-                "-fx-min-width: 42; -fx-min-height: 42; " +
-                "-fx-alignment: center; " +
-                "-fx-cursor: hand; " +
-                "-fx-text-fill: #cccccc;" +
-                "-fx-border-color: #888888;"
-            ));
-            prev.setOnMouseExited(e  -> prev.setStyle(
-                "-fx-background-color: #1a1d1e; " +
-                "-fx-text-fill: #888888; " +
-                "-fx-font-size: 13; " +
-                "-fx-font-family: 'Courier New'; " +
-                "-fx-font-weight: bold; " +
-                "-fx-border-radius: 50; " +
-                "-fx-background-radius: 50; " +
-                "-fx-border-width: 1; " +
-                "-fx-border-color: #444444; " +
-                "-fx-padding: 4; " +
-                "-fx-min-width: 38; -fx-min-height: 38; " +
-                "-fx-alignment: center; " +
-                "-fx-cursor: hand; "
-            ));
+            next.setOnMouseEntered(e -> next.setStyle(STILE_ROTORE_BOTTONE_SOPRA));
+            next.setOnMouseExited( e -> next.setStyle(STILE_ROTORE_BOTTONE));
+            prev.setOnMouseEntered(e -> prev.setStyle(STILE_ROTORE_BOTTONE_SOPRA));
+            prev.setOnMouseExited( e -> prev.setStyle(STILE_ROTORE_BOTTONE));
 
             GridPane.setHalignment(title, javafx.geometry.HPos.CENTER);
             GridPane.setHalignment(next,  javafx.geometry.HPos.CENTER);
@@ -187,15 +214,7 @@ public class EnigmaController {
 
             if (i < n - 1) {
                 Button swapBtn = new Button("⇄");
-                swapBtn.setStyle(
-                    "-fx-background-color: #1a1d1e; " +
-                    "-fx-text-fill: #666666; " +
-                    "-fx-font-size: 18; " +
-                    "-fx-border-width: 1; " +
-                    "-fx-border-color: #444444; " +
-                    "-fx-cursor: hand; " +
-                    "-fx-padding: 4 8; "
-                );
+                swapBtn.setStyle(STILE_ROTORE_SCAMBIA);
 
                 final int idxA = i;
                 swapBtn.setOnAction(e -> {
@@ -213,8 +232,8 @@ public class EnigmaController {
     private void updateLabelsRotori() {
         for (int i = 0; i < macchina.getSizeRotori(); i++) {
             rotoriLabels[i][0].setText(String.valueOf(macchina.getPosizione(i, -1)));
-            rotoriLabels[i][1].setText(String.valueOf(macchina.getPosizione(i, 0)));
-            rotoriLabels[i][2].setText(String.valueOf(macchina.getPosizione(i, 1)));
+            rotoriLabels[i][1].setText(String.valueOf(macchina.getPosizione(i,  0)));
+            rotoriLabels[i][2].setText(String.valueOf(macchina.getPosizione(i,  1)));
         }
     }
 
@@ -232,19 +251,7 @@ public class EnigmaController {
 
                 buttons[index] = new Button("" + lettera);
                 buttons[index].setPrefWidth(800.0 / 10);
-
-                buttons[index].setStyle(
-                    "-fx-background-color: #25292A; " +
-                    "-fx-text-fill: #ffffff; " +
-                    "-fx-font-size: 16; " +
-                    "-fx-font-family: 'Courier new'; " +
-                    "-fx-border-radius: 50; " +
-                    "-fx-background-radius: 50; " +
-                    "-fx-border-width: 2; " +
-                    "-fx-border-color: #666666; " +
-                    "-fx-cursor: hand; " +
-                    "-fx-font-weight: bold; "
-                );
+                buttons[index].setStyle(STILE_BOTTONE);
                 buttons[index].setPrefSize(50, 50);
                 buttons[index].setMaxSize(70, 70);
                 buttons[index].setMinSize(40, 40);
@@ -273,27 +280,12 @@ public class EnigmaController {
 
                 labels[index] = new Label("" + lettera);
                 labels[index].setPrefWidth(800.0 / 10);
-
-                labels[index].setStyle(
-                    "-fx-padding: 5; " +
-                    "-fx-background-color: #ffffff; " +
-                    "-fx-border-radius: 50; " +
-                    "-fx-background-radius: 50; " +
-                    "-fx-text-fill: #000000; " +
-                    "-fx-font-weight: bold; " +
-                    "-fx-font-size: 14; " +
-                    "-fx-font-family: 'Courier New'; " +
-                    "-fx-border-color: #555555; " +
-                    "-fx-border-width: 2; " +
-                    "-fx-alignment: center"
-                );
-
+                labels[index].setStyle(STILE_LUCE_OFF);
                 labels[index].setPrefSize(50, 40);
                 labels[index].setMaxSize(60, 50);
                 labels[index].setMinSize(40, 30);
 
                 gridLight.add(labels[index], j, i, 1, 1);
-
                 lettera++;
             }
         }
@@ -301,7 +293,6 @@ public class EnigmaController {
 
     private void creaGridPlugBoard() {
         plugButtons = new Button[26];
-
         gridPlugBoard.setHgap(10);
         gridPlugBoard.setVgap(10);
         gridPlugBoard.getColumnConstraints().clear();
@@ -316,15 +307,7 @@ public class EnigmaController {
                 btn.setPrefWidth(800.0 / 10);
                 plugButtons[index] = btn;
 
-                plugButtons[index].setStyle(
-                    "-fx-background-color: #000000; " +
-                    "-fx-text-fill: #ffffff; " +
-                    "-fx-font-size: 14; " +
-                    "-fx-font-family: 'Courier new'; " +
-                    "-fx-background-radius: 50; " +
-                    "-fx-cursor: hand; " +
-                    "-fx-font-weight: bold; "
-                );
+                plugButtons[index].setStyle(STILE_PLUG_BASE);
                 plugButtons[index].setPrefSize(40, 40);
                 plugButtons[index].setMaxSize(50, 50);
                 plugButtons[index].setMinSize(30, 30);
@@ -341,29 +324,15 @@ public class EnigmaController {
     private void onPlugButtonClick(char lettera) {
         int index = lettera - 'A';
 
-        char partner = macchina.getCoppia(lettera);
-        if (partner != lettera) {
-            plugButtons[index].setStyle(
-                "-fx-background-color: #000000; " +
-                "-fx-text-fill: #ffffff; " +
-                "-fx-font-size: 14; " +
-                "-fx-font-family: 'Courier new'; " +
-                "-fx-background-radius: 50; " +
-                "-fx-cursor: hand; " +
-                "-fx-font-weight: bold; "
-            );
-            plugButtons[partner - 'A'].setStyle(
-                "-fx-background-color: #000000; " +
-                "-fx-text-fill: #ffffff; " +
-                "-fx-font-size: 14; " +
-                "-fx-font-family: 'Courier new'; " +
-                "-fx-background-radius: 50; " +
-                "-fx-cursor: hand; " +
-                "-fx-font-weight: bold; "
-            );
+        if (macchina.haCoppia(lettera)) {
+            char partner = macchina.getCoppia(lettera);
             macchina.rimuoviCoppia(lettera);
-            macchina.rimuoviCoppia(partner);
-            if (primaLetteraSelezionata != null && primaLetteraSelezionata == lettera) {
+
+            plugButtons[index].setStyle(STILE_PLUG_BASE);
+            plugButtons[partner - 'A'].setStyle(STILE_PLUG_BASE);
+
+            if (primaLetteraSelezionata != null &&
+                    (primaLetteraSelezionata == lettera || primaLetteraSelezionata == partner)) {
                 primaLetteraSelezionata = null;
             }
             return;
@@ -371,53 +340,20 @@ public class EnigmaController {
 
         if (primaLetteraSelezionata == null) {
             primaLetteraSelezionata = lettera;
-            plugButtons[index].setStyle(
-                "-fx-background-color: orange;" +
-                "-fx-text-fill: #000000; " +
-                "-fx-font-size: 14; " +
-                "-fx-font-family: 'Courier new'; " +
-                "-fx-background-radius: 50; " +
-                "-fx-cursor: hand; " +
-                "-fx-font-weight: bold; "
-            );
+            plugButtons[index].setStyle(STILE_PLUG_SELEZIONATO);
             return;
         }
 
         if (primaLetteraSelezionata == lettera) {
             primaLetteraSelezionata = null;
-            plugButtons[index].setStyle(
-                "-fx-background-color: #000000; " +
-                "-fx-text-fill: #ffffff; " +
-                "-fx-font-size: 14; " +
-                "-fx-font-family: 'Courier new'; " +
-                "-fx-background-radius: 50; " +
-                "-fx-cursor: hand; " +
-                "-fx-font-weight: bold; "
-            );
+            plugButtons[index].setStyle(STILE_PLUG_BASE);
             return;
         }
 
-        boolean successo = macchina.aggiungiCoppia(primaLetteraSelezionata, lettera);
-        if (successo) {
+        if (macchina.aggiungiCoppia(primaLetteraSelezionata, lettera)) {
             String colore = macchina.getColoreCoppia();
-            plugButtons[primaLetteraSelezionata - 'A'].setStyle(
-                "-fx-background-color: " + colore + ";" +
-                "-fx-text-fill: #000000; " +
-                "-fx-font-size: 14; " +
-                "-fx-font-family: 'Courier new'; " +
-                "-fx-background-radius: 50; " +
-                "-fx-cursor: hand; " +
-                "-fx-font-weight: bold; "
-            );
-            plugButtons[index].setStyle(
-                "-fx-background-color: " + colore + ";" +
-                "-fx-text-fill: #000000; " +
-                "-fx-font-size: 14; " +
-                "-fx-font-family: 'Courier new'; " +
-                "-fx-background-radius: 50; " +
-                "-fx-cursor: hand; " +
-                "-fx-font-weight: bold; "
-            );
+            plugButtons[primaLetteraSelezionata - 'A'].setStyle(stilePlugColorato(colore));
+            plugButtons[index].setStyle(stilePlugColorato(colore));
         }
         primaLetteraSelezionata = null;
     }
@@ -426,44 +362,22 @@ public class EnigmaController {
         char cifrata = macchina.cifraLettera(lettera);
         updateLabelsRotori();
 
-        int outputIndex = cifrata - 'A';
         spegniTutteLeLuci();
-        labels[outputIndex].setStyle(
-            "-fx-padding: 5; " +
-            "-fx-background-color: yellow; " +
-            "-fx-border-radius: 50; " +
-            "-fx-background-radius: 50; " +
-            "-fx-text-fill: #000000; " +
-            "-fx-font-weight: bold; " +
-            "-fx-font-size: 14; " +
-            "-fx-font-family: 'Courier New'; " +
-            "-fx-border-color: #555555; " +
-            "-fx-border-width: 2; " +
-            "-fx-alignment: center"
-        );
-        if (inputTextArea.getText().replace(" ", "").length() % 5 == 0 && !inputTextArea.getText().isEmpty()) {
+        labels[cifrata - 'A'].setStyle(STILE_LUCE_ON);
+
+        String inputPulito = inputTextArea.getText().replace(" ", "");
+        if (!inputPulito.isEmpty() && inputPulito.length() % 5 == 0) {
             inputTextArea.appendText(" ");
             outputTextArea.appendText(" ");
         }
+
         inputTextArea.appendText(String.valueOf(lettera));
         outputTextArea.appendText(String.valueOf(cifrata));
     }
 
     private void spegniTutteLeLuci() {
         for (Label l : labels) {
-            if (l != null) l.setStyle(
-                "-fx-padding: 5; " +
-                "-fx-background-color: #ffffff; " +
-                "-fx-border-radius: 50; " +
-                "-fx-background-radius: 50; " +
-                "-fx-text-fill: #000000; " +
-                "-fx-font-weight: bold; " +
-                "-fx-font-size: 14; " +
-                "-fx-font-family: 'Courier New'; " +
-                "-fx-border-color: #555555; " +
-                "-fx-border-width: 2; " +
-                "-fx-alignment: center"
-            );
+            if (l != null) l.setStyle(STILE_LUCE_OFF);
         }
     }
 

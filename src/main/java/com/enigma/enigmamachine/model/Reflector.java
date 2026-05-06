@@ -23,6 +23,9 @@ public class Reflector {
     }
 
     public char rifletti(char c){
+        if (c < 'A' || c > 'Z') {
+            return c;
+        }
         c = Character.toUpperCase(c);
         return mappaSpecchio.get(c);
     }
