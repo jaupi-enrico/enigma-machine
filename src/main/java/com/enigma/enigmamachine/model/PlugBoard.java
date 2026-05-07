@@ -27,17 +27,19 @@ public class PlugBoard {
 
     public boolean rimuoviCoppia(char a) {
         a = Character.toUpperCase(a);
+        if (!cablaggio.containsKey(a)) return false;
 
-        if (!cablaggio.containsKey(a))
-            return false;
-
-        cablaggio.remove(cablaggio.remove(a));
+        char b = cablaggio.remove(a);
+        cablaggio.remove(b);
         return true;
     }
-
 
     public char codifica(char c) {
         c = Character.toUpperCase(c);
         return cablaggio.getOrDefault(c, c);
+    }
+
+    public boolean haCoppia(char a) {
+        return cablaggio.containsKey(Character.toUpperCase(a));
     }
 }

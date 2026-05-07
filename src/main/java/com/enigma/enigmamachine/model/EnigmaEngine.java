@@ -86,6 +86,10 @@ public class EnigmaEngine {
         return plugBoard.codifica(lettera);
     }
 
+    public boolean haCoppia(char lettera) {
+        return plugBoard.haCoppia(lettera);
+    }
+
     public String getColoreCoppia() {
         String colore;
         switch (numeroCoppie) {
