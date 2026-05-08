@@ -27,132 +27,132 @@ public class EnigmaController {
     @FXML private TextArea outputTextArea;
 
     private static final String STILE_ROTORE_TITOLO =
-            "-fx-text-fill: #888888; " +
-            "-fx-font-size: 12; " +
-            "-fx-font-family: 'Courier New'; " +
-            "-fx-font-weight: bold; " +
-            "-fx-alignment: center; ";
+        "-fx-text-fill: #888888; " +
+        "-fx-font-size: 12; " +
+        "-fx-font-family: 'Courier New'; " +
+        "-fx-font-weight: bold; " +
+        "-fx-alignment: center; ";
 
     private static final String STILE_ROTORE_CORRENTE =
-            "-fx-background-color: #25292A; " +
-            "-fx-text-fill: #ffffff; " +
-            "-fx-font-size: 16; " +
-            "-fx-font-family: 'Courier New'; " +
-            "-fx-font-weight: bold; " +
-            "-fx-border-radius: 50; " +
-            "-fx-background-radius: 50; " +
-            "-fx-border-width: 2; " +
-            "-fx-border-color: #666666; " +
-            "-fx-padding: 6; " +
-            "-fx-min-width: 45; -fx-min-height: 45; " +
-            "-fx-alignment: center; ";
+        "-fx-background-color: #25292A; " +
+        "-fx-text-fill: #ffffff; " +
+        "-fx-font-size: 16; " +
+        "-fx-font-family: 'Courier New'; " +
+        "-fx-font-weight: bold; " +
+        "-fx-border-radius: 50; " +
+        "-fx-background-radius: 50; " +
+        "-fx-border-width: 2; " +
+        "-fx-border-color: #666666; " +
+        "-fx-padding: 6; " +
+        "-fx-min-width: 45; -fx-min-height: 45; " +
+        "-fx-alignment: center; ";
 
     private static final String STILE_ROTORE_BOTTONE =
-            "-fx-background-color: #1a1d1e; " +
-            "-fx-text-fill: #888888; " +
-            "-fx-font-size: 13; " +
-            "-fx-font-family: 'Courier New'; " +
-            "-fx-font-weight: bold; " +
-            "-fx-border-radius: 50; " +
-            "-fx-background-radius: 50; " +
-            "-fx-border-width: 1; " +
-            "-fx-border-color: #444444; " +
-            "-fx-padding: 4; " +
-            "-fx-min-width: 38; -fx-min-height: 38; " +
-            "-fx-alignment: center; " +
-            "-fx-cursor: hand; ";
+        "-fx-background-color: #1a1d1e; " +
+        "-fx-text-fill: #888888; " +
+        "-fx-font-size: 13; " +
+        "-fx-font-family: 'Courier New'; " +
+        "-fx-font-weight: bold; " +
+        "-fx-border-radius: 50; " +
+        "-fx-background-radius: 50; " +
+        "-fx-border-width: 1; " +
+        "-fx-border-color: #444444; " +
+        "-fx-padding: 4; " +
+        "-fx-min-width: 38; -fx-min-height: 38; " +
+        "-fx-alignment: center; " +
+        "-fx-cursor: hand; ";
 
     private static final String STILE_ROTORE_BOTTONE_SOPRA =
-            "-fx-background-color: #1a1d1e; " +
-            "-fx-text-fill: #cccccc; " +
-            "-fx-font-size: 15; " +
-            "-fx-font-family: 'Courier New'; " +
-            "-fx-font-weight: bold; " +
-            "-fx-border-radius: 50; " +
-            "-fx-background-radius: 50; " +
-            "-fx-border-width: 1; " +
-            "-fx-border-color: #888888; " +
-            "-fx-padding: 4; " +
-            "-fx-min-width: 42; -fx-min-height: 42; " +
-            "-fx-alignment: center; " +
-            "-fx-cursor: hand; ";
+        "-fx-background-color: #1a1d1e; " +
+        "-fx-text-fill: #cccccc; " +
+        "-fx-font-size: 15; " +
+        "-fx-font-family: 'Courier New'; " +
+        "-fx-font-weight: bold; " +
+        "-fx-border-radius: 50; " +
+        "-fx-background-radius: 50; " +
+        "-fx-border-width: 1; " +
+        "-fx-border-color: #888888; " +
+        "-fx-padding: 4; " +
+        "-fx-min-width: 42; -fx-min-height: 42; " +
+        "-fx-alignment: center; " +
+        "-fx-cursor: hand; ";
 
     private static final String STILE_ROTORE_SCAMBIA =
-            "-fx-background-color: #1a1d1e; " +
-            "-fx-text-fill: #666666; " +
-            "-fx-font-size: 18; " +
-            "-fx-border-width: 1; " +
-            "-fx-border-color: #444444; " +
-            "-fx-cursor: hand; " +
-            "-fx-padding: 4 8; ";
+        "-fx-background-color: #1a1d1e; " +
+        "-fx-text-fill: #666666; " +
+        "-fx-font-size: 18; " +
+        "-fx-border-width: 1; " +
+        "-fx-border-color: #444444; " +
+        "-fx-cursor: hand; " +
+        "-fx-padding: 4 8; ";
 
 
     private static final String STILE_BOTTONE =
-            "-fx-background-color: #25292A; " +
-            "-fx-text-fill: #ffffff; " +
-            "-fx-font-size: 16; " +
-            "-fx-font-family: 'Courier New'; " +
-            "-fx-border-radius: 50; " +
-            "-fx-background-radius: 50; " +
-            "-fx-border-width: 2; " +
-            "-fx-border-color: #666666; " +
-            "-fx-cursor: hand; " +
-            "-fx-font-weight: bold; ";
+        "-fx-background-color: #25292A; " +
+        "-fx-text-fill: #ffffff; " +
+        "-fx-font-size: 16; " +
+        "-fx-font-family: 'Courier New'; " +
+        "-fx-border-radius: 50; " +
+        "-fx-background-radius: 50; " +
+        "-fx-border-width: 2; " +
+        "-fx-border-color: #666666; " +
+        "-fx-cursor: hand; " +
+        "-fx-font-weight: bold; ";
 
     private static final String STILE_LUCE_OFF =
-            "-fx-padding: 5; " +
-            "-fx-background-color: #ffffff; " +
-            "-fx-border-radius: 50; " +
-            "-fx-background-radius: 50; " +
-            "-fx-text-fill: #000000; " +
-            "-fx-font-weight: bold; " +
-            "-fx-font-size: 14; " +
-            "-fx-font-family: 'Courier New'; " +
-            "-fx-border-color: #555555; " +
-            "-fx-border-width: 2; " +
-            "-fx-alignment: center; ";
+        "-fx-padding: 5; " +
+        "-fx-background-color: #ffffff; " +
+        "-fx-border-radius: 50; " +
+        "-fx-background-radius: 50; " +
+        "-fx-text-fill: #000000; " +
+        "-fx-font-weight: bold; " +
+        "-fx-font-size: 14; " +
+        "-fx-font-family: 'Courier New'; " +
+        "-fx-border-color: #555555; " +
+        "-fx-border-width: 2; " +
+        "-fx-alignment: center; ";
 
     private static final String STILE_LUCE_ON =
-            "-fx-padding: 5; " +
-            "-fx-background-color: yellow; " +
-            "-fx-border-radius: 50; " +
-            "-fx-background-radius: 50; " +
-            "-fx-text-fill: #000000; " +
-            "-fx-font-weight: bold; " +
-            "-fx-font-size: 14; " +
-            "-fx-font-family: 'Courier New'; " +
-            "-fx-border-color: #555555; " +
-            "-fx-border-width: 2; " +
-            "-fx-alignment: center; ";
+        "-fx-padding: 5; " +
+        "-fx-background-color: yellow; " +
+        "-fx-border-radius: 50; " +
+        "-fx-background-radius: 50; " +
+        "-fx-text-fill: #000000; " +
+        "-fx-font-weight: bold; " +
+        "-fx-font-size: 14; " +
+        "-fx-font-family: 'Courier New'; " +
+        "-fx-border-color: #555555; " +
+        "-fx-border-width: 2; " +
+        "-fx-alignment: center; ";
 
 
     private static final String STILE_PLUG_BASE =
-            "-fx-background-color: #000000; " +
-            "-fx-text-fill: #ffffff; " +
-            "-fx-font-size: 14; " +
-            "-fx-font-family: 'Courier New'; " +
-            "-fx-background-radius: 50; " +
-            "-fx-cursor: hand; " +
-            "-fx-font-weight: bold; ";
+        "-fx-background-color: #000000; " +
+        "-fx-text-fill: #ffffff; " +
+        "-fx-font-size: 14; " +
+        "-fx-font-family: 'Courier New'; " +
+        "-fx-background-radius: 50; " +
+        "-fx-cursor: hand; " +
+        "-fx-font-weight: bold; ";
 
     private static final String STILE_PLUG_SELEZIONATO =
-            "-fx-background-color: orange; " +
+        "-fx-background-color: orange; " +
+        "-fx-text-fill: #000000; " +
+        "-fx-font-size: 14; " +
+        "-fx-font-family: 'Courier New'; " +
+        "-fx-background-radius: 50; " +
+        "-fx-cursor: hand; " +
+        "-fx-font-weight: bold; ";
+
+    private String stilePlugColorato(String colore) {
+        String s = "-fx-background-color: " + colore + "; " +
             "-fx-text-fill: #000000; " +
             "-fx-font-size: 14; " +
             "-fx-font-family: 'Courier New'; " +
             "-fx-background-radius: 50; " +
             "-fx-cursor: hand; " +
             "-fx-font-weight: bold; ";
-
-    private String stilePlugColorato(String colore) {
-            String s = "-fx-background-color: " + colore + "; " +
-                    "-fx-text-fill: #000000; " +
-                    "-fx-font-size: 14; " +
-                    "-fx-font-family: 'Courier New'; " +
-                    "-fx-background-radius: 50; " +
-                    "-fx-cursor: hand; " +
-                    "-fx-font-weight: bold; ";
-            return s;
+        return s;
     }
 
 
@@ -203,14 +203,14 @@ public class EnigmaController {
             prev.setOnMouseExited( e -> prev.setStyle(STILE_ROTORE_BOTTONE));
 
             GridPane.setHalignment(title, javafx.geometry.HPos.CENTER);
-            GridPane.setHalignment(next,  javafx.geometry.HPos.CENTER);
-            GridPane.setHalignment(curr,  javafx.geometry.HPos.CENTER);
-            GridPane.setHalignment(prev,  javafx.geometry.HPos.CENTER);
+            GridPane.setHalignment(next, javafx.geometry.HPos.CENTER);
+            GridPane.setHalignment(curr, javafx.geometry.HPos.CENTER);
+            GridPane.setHalignment(prev, javafx.geometry.HPos.CENTER);
 
             gridRotori.add(title, col, 0);
-            gridRotori.add(next,  col, 1);
-            gridRotori.add(curr,  col, 2);
-            gridRotori.add(prev,  col, 3);
+            gridRotori.add(next, col, 1);
+            gridRotori.add(curr, col, 2);
+            gridRotori.add(prev, col, 3);
 
             if (i < n - 1) {
                 Button swapBtn = new Button("⇄");
@@ -232,8 +232,8 @@ public class EnigmaController {
     private void updateLabelsRotori() {
         for (int i = 0; i < macchina.getSizeRotori(); i++) {
             rotoriLabels[i][0].setText(String.valueOf(macchina.getPosizione(i, -1)));
-            rotoriLabels[i][1].setText(String.valueOf(macchina.getPosizione(i,  0)));
-            rotoriLabels[i][2].setText(String.valueOf(macchina.getPosizione(i,  1)));
+            rotoriLabels[i][1].setText(String.valueOf(macchina.getPosizione(i, 0)));
+            rotoriLabels[i][2].setText(String.valueOf(macchina.getPosizione(i, 1)));
         }
     }
 
