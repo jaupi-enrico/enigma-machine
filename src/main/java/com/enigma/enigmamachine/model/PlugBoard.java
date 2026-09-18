@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PlugBoard {
+    
 
     private final Map<Character, Character> cablaggio = new HashMap<>();
 
